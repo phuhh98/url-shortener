@@ -1,8 +1,10 @@
 const { Router } = require("express");
 const ShortURL = require("../models/shortURL.js"); // load ShortURL models
 const validator = require("validator");
-const { nanoid } = require("nanoid");
 const router = new Router(); //create a router instance
+//tweak nanoid to make random id with urlAlphabet with the size of 5
+const { customAlphabet, urlAlphabet } = require("nanoid");
+const nanoid = customAlphabet(urlAlphabet, process.env.NANOID_SIZE);
 
 //handle post request to post new short url to db via x-www-urlencoded
 router.post("/url", async (req, res) => {
