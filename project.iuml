@@ -1,0 +1,24 @@
+@startuml overview
+'left to right direction
+'entities
+actor user
+rectangle Server {
+    (Get short URL) as GET
+    (Enter URL) as enterURL
+    (Save to MongoDB\n& return shortened URL) as saveDB
+    (Generate Id\nfor shortID) as Gen
+    (Query DB) as Query
+}
+
+'relationship'
+user -r-> GET
+user --> enterURL
+
+GET .d.> Query: <i><<include>></i>
+GET ..> enterURL: <i><<include>></i>
+
+saveDB .l.> enterURL: <i><<include>></i>
+saveDB .u.>GET: : <i><<extend>></i>
+saveDB ..> Gen: <i><<include>></i>
+
+@enduml
