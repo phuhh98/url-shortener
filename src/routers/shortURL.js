@@ -37,7 +37,7 @@ router.post("/url", async (req, res) => {
     } else {
       //if doesn't exist, generate random shortID and save to server // stry until shortId is unique
       shortId = nanoid();
-      shortURL = `${req.protocol}://${req.hostname}:${process.env.PORT}/${shortId}`;
+      shortURL = `${req.protocol}://${req.hostname}/${shortId}`;
       newURL = new ShortURL({ origin: req.body.origin, shortId, shortURL });
       await newURL.save();
       res.send(newURL); //return json string for { origin, shortURL, shortId }
