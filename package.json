@@ -1,0 +1,31 @@
+{
+  "name": "url-shortener",
+  "version": "0.0.1",
+  "description": "url shortener with expressjs",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "nodemon app.js",
+    "start": "node src/app.js",
+    "dev": "nodemon src/index.js -e js,hbs"
+  },
+  "keywords": [
+    "url",
+    "url shortener",
+    "expressjs",
+    "mongodb"
+  ],
+  "author": "Hoai Phu",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.4",
+    "nanoid": "^3.1.25",
+    "pug": "^3.0.2",
+    "validator": "^13.6.0"
+  }
+}
