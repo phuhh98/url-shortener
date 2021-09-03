@@ -1,4 +1,4 @@
-require("dotenv").config(); // load env var from .env for dev test
+//require("dotenv").config(); // load env var from .env for dev test
 require("./db/mongoose.js"); //establish connect with mongodb
 const express = require("express");
 const shortURL = require("./routers/shortURL.js");
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/:shortId", (req, res) => {
-  console.log(req.params.shortId);
+  //console.log(req.params.shortId);
   if (req.params.shortId) {
     res.redirect(`/url/${shortId}`);
   }

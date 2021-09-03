@@ -8,7 +8,6 @@ const router = new Router(); //create a router instance
 router.post("/url", async (req, res) => {
   try {
     //validate the URL from x-www-form-urlencoded
-    console.log(req.body.origin);
     const isURL = validator.isURL(encodeURI(req.body.origin), {
       protocols: ["http", "https", "ftp"],
       require_tld: true,
