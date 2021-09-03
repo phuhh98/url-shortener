@@ -7,7 +7,9 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const viewsPath = path.join(__dirname, "../templates/views");
-const publicDirectoryPath = path.join(__dirname, "public");
+const publicDirectoryPath = path.join(__dirname, "../public");
+console.log(publicDirectoryPath);
+//console.log(viewsPath, publicDirectoryPath);
 
 app.set("view engine", "pug");
 app.set("views", viewsPath);
@@ -20,7 +22,7 @@ app.use(shortURL); // /url/ router
 
 app.get("/", (req, res) => {
   //render index view with a form
-  res.render();
+  res.render("index");
 });
 
 app.listen(PORT, () => {

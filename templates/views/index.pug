@@ -1,0 +1,15 @@
+extend ./layout/common.pug
+block content
+    div(class="row mt-2 mb-2")
+        h1 URL Shortener
+    div(class="row align-middle")
+        form(id="urlForm" class="form-inline" action="/url" method="post" enctype="application/x-www-form-urlencoded")
+            label(for="origin" class="sr-only") Original Url
+            div(class="row")
+                div(class="col")
+                    input(type="text" name="origin" id="origin" class="form-control-plaintext pl-3 pr-3 rounded border-dark"  placeholder="https://")
+                div(class="col")
+                    button(type="submit" class="btn btn-primary mb-2") Get short url
+    div(class="row") Short Url
+        p(id="shortUrl")
+    script(type="text/javascript" src="./js/fetchUrl.js")

@@ -4,7 +4,7 @@ const validator = require("validator");
 const { nanoid } = require("nanoid");
 const router = new Router(); //create a router instance
 
-//handle post request to post new short url to db
+//handle post request to post new short url to db via x-www-urlencoded
 router.post("/url", async (req, res) => {
   try {
     //validate the URL from x-www-form-urlencoded
@@ -39,13 +39,13 @@ router.get("/url/:shortId", async (req, res) => {
     //search for url from db
     let shortURL = await ShortURL.findOne({ shortId: req.params.shortId });
     //if exist => redirect to destination url
-    console.log(shortURL);
+    //console.log(shortURL);
     if (shortURL) {
       res.redirect(shortURL.origin);
       return;
     } else {
       //if does not exist => res.render(404 page)
-      res.send(" 404 not found");
+      res.send("404 not found");
     }
   } catch (err) {
     console.error(err);
