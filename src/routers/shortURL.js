@@ -4,7 +4,7 @@ const validator = require("validator");
 const router = new Router(); //create a router instance
 //tweak nanoid to make random id with urlAlphabet with the size of 5
 const { customAlphabet, urlAlphabet } = require("nanoid");
-const nanoid = customAlphabet(urlAlphabet, process.env.NANOID_SIZE);
+const nanoid = customAlphabet(urlAlphabet, parseInt(process.env.NANOID_SIZE));
 
 //handle post request to post new short url to db via x-www-urlencoded
 router.post("/url", async (req, res) => {
@@ -38,9 +38,9 @@ router.post("/url", async (req, res) => {
       res.send(exist);
     } else {
       //if doesn't exist, generate random shortID and save to server // stry until shortId is unique
-      shortId = nanoid();
-      shortURL = `${req.protocol}://${req.hostname}/${shortId}`;
-      newURL = new ShortURL({ origin: req.body.origin, shortId, shortURL });
+      let shortId = nanoid();
+      let shortURL = `${req.protocol}://${req.hostname}/${shortId}`;
+      let newURL = new ShortURL({ origin: req.body.origin, shortId, shortURL });
       await newURL.save();
       res.send(newURL); //return json string for { origin, shortURL, shortId }
     }
