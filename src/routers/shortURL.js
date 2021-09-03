@@ -8,17 +8,18 @@ const router = new Router(); //create a router instance
 router.post("/url", async (req, res) => {
   try {
     //validate the URL from x-www-form-urlencoded
-    const isURL = validator.isURL(req.body.origin, {
+    console.log(req.body.origin);
+    const isURL = validator.isURL(encodeURI(req.body.origin), {
       protocols: ["http", "https", "ftp"],
       require_tld: true,
       require_protocol: true,
       require_host: true,
       require_port: false,
       require_valid_protocol: true,
-      allow_underscores: true,
+      allow_underscores: false,
       host_whitelist: false,
       host_blacklist: false,
-      allow_trailing_dot: true,
+      allow_trailing_dot: false,
       allow_protocol_relative_urls: true,
       disallow_auth: false,
       validate_length: false,
@@ -29,7 +30,7 @@ router.post("/url", async (req, res) => {
     }
 
     //findOne for the exist of that URL
-    const exist = await ShortURL.findOne({ origin: req.body.origin });
+    const exist = await ShortURL.findOne({ origin: encodeURI(req.body.origin) });
     if (exist) {
       //if exist rerturn shortURL found
 
