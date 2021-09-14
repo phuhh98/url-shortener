@@ -6,11 +6,11 @@ a practice project to learn about mongodb, expressjs
 
 ### Packages used
 
-<b>expressjs</b>: server functions
-<b>mongoose</b>: mongodb driver
-<b>nanoid</b>: generate unique ID to each URL
-<b>pug</b>: view template engine for GUI
-<b>validatorjs</b>: validating input URL
+<b>expressjs</b>: server functions <br>
+<b>mongoose</b>: mongodb driver <br>
+<b>nanoid</b>: generate unique ID to each URL<br>
+<b>pug</b>: view template engine for GUI <br>
+<b>validatorjs</b>: validating input URL <br>
 
 ### Deployment
 
