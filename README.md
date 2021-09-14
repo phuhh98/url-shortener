@@ -4,7 +4,7 @@
 
 a practice project to learn about mongodb, expressjs
 
-### Packages used
+### Packages
 
 <b>expressjs</b>: server functions <br>
 <b>mongoose</b>: mongodb driver <br>
