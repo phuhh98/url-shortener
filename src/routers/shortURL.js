@@ -4,7 +4,7 @@ const validator = require("validator");
 const router = new Router(); //create a router instance
 //tweak nanoid to make random id with urlAlphabet with the size of 5
 const { customAlphabet, urlAlphabet } = require("nanoid");
-const nanoid = customAlphabet(urlAlphabet, parseInt(process.env.NANOID_SIZE));
+const nanoid = customAlphabet(urlAlphabet, parseInt(process.env.NANOID_SIZE) || 6);
 
 //handle post request to post new short url to db via x-www-urlencoded
 router.post("/url", async (req, res) => {
