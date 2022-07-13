@@ -1,17 +1,20 @@
-const { Router } = require("express");
-const ShortURL = require("../models/shortURL.js"); // load ShortURL models
-const validator = require("validator");
+const { Router } = require('express');
+const ShortURL = require('../models/shortURL.js'); // load ShortURL models
+const validator = require('validator');
 const router = new Router(); //create a router instance
 //tweak nanoid to make random id with urlAlphabet with the size of 5
-const { customAlphabet, urlAlphabet } = require("nanoid");
-const nanoid = customAlphabet(urlAlphabet, parseInt(process.env.NANOID_SIZE) || 6);
+const { customAlphabet, urlAlphabet } = require('nanoid');
+const nanoid = customAlphabet(
+  urlAlphabet,
+  parseInt(process.env.NANOID_SIZE) || 6
+);
 
 //handle post request to post new short url to db via x-www-urlencoded
-router.post("/url", async (req, res) => {
+router.post('/url', async (req, res) => {
   try {
     //validate the URL from x-www-form-urlencoded
     const isURL = validator.isURL(encodeURI(req.body.origin), {
-      protocols: ["http", "https", "ftp"],
+      protocols: ['http', 'https', 'ftp'],
       require_tld: true,
       require_protocol: true,
       require_host: true,
@@ -26,12 +29,14 @@ router.post("/url", async (req, res) => {
       validate_length: false,
     });
     if (!isURL) {
-      res.send({ error: "Invalid Url" });
+      res.send({ error: 'Invalid Url' });
       return;
     }
 
     //findOne for the exist of that URL
-    const exist = await ShortURL.findOne({ origin: encodeURI(req.body.origin) });
+    const exist = await ShortURL.findOne({
+      origin: encodeURI(req.body.origin),
+    });
     if (exist) {
       //if exist rerturn shortURL found
 
@@ -39,7 +44,9 @@ router.post("/url", async (req, res) => {
     } else {
       //if doesn't exist, generate random shortID and save to server // stry until shortId is unique
       let shortId = nanoid();
-      let shortURL = `${req.protocol}://${req.hostname}/${shortId}`;
+      let shortURL = `${req.protocol}://${req.hostname}${
+        ':' + process.env?.PORT
+      }/${shortId}`;
       let newURL = new ShortURL({ origin: req.body.origin, shortId, shortURL });
       await newURL.save();
       res.send(newURL); //return json string for { origin, shortURL, shortId }
@@ -50,7 +57,7 @@ router.post("/url", async (req, res) => {
 });
 
 //handle get request for shorted url
-router.get("/url/:shortId", async (req, res) => {
+router.get('/url/:shortId', async (req, res) => {
   try {
     //search for url from db
     let shortURL = await ShortURL.findOne({ shortId: req.params.shortId });
@@ -61,7 +68,7 @@ router.get("/url/:shortId", async (req, res) => {
       return;
     } else {
       //if does not exist => res.render(404 page)
-      res.send("404 not found");
+      res.send('404 not found');
     }
   } catch (err) {
     console.error(err);
