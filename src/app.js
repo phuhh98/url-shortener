@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:shortId', (req, res) => {
-  //console.log(req.params.shortId);
   if (req.params.shortId) {
     res.redirect(`/url/${req.params.shortId}`);
   }
