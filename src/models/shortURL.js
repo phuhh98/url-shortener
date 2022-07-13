@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 //url documents will have to be unique in baseURL and shortURL to avoid db flood
@@ -34,10 +34,9 @@ ShortURLSChema.methods.toJSON = function () {
   delete shortURLObject.createdAt;
   delete shortURLObject.updatedAt;
   delete shortURLObject.__v;
-  //console.log(shortURLObject);
   return shortURLObject;
 };
 
-const ShortURL = new mongoose.model("ShortURL", ShortURLSChema);
+const ShortURL = new mongoose.model('ShortURL', ShortURLSChema);
 
 module.exports = ShortURL;
